@@ -147,49 +147,49 @@ curl -X POST localhost:5000/parse -d '{"q":"Would you mind turn on the lights in
 Output should look like this
 ```
 {
-	"entities": [
-		{
-			"confidence": 0.9998761576023072,
-			"end": 22,
-			"entity": "Action",
-			"extractor": "ner_crf",
-			"start": 15,
-			"value": "turn on"
-		},
-		{
-			"confidence": 0.8802018042071649,
-			"end": 33,
-			"entity": "Object",
-			"extractor": "ner_crf",
-			"start": 27,
-			"value": "lights"
-		},
-		{
-			"confidence": 0.7427414578833027,
-			"end": 48,
-			"entity": "Place",
-			"extractor": "ner_crf",
-			"start": 41,
-			"value": "kitchen"
-		}
-	],
-	"intent": {
-		"confidence": 0.9999948435830418,
-		"name": "turn on"
-	},
-	"intent_ranking": [
-		{
-			"confidence": 0.9999948435830418,
-			"name": "turn on"
-		},
-		{
-			"confidence": 0.000005156416958228346,
-			"name": "turn off"
-		}
-	],
-	"model": "model_20180621-132826",
-	"project": "default",
-	"text": "Would you mind turn on the lights in the kitchen?"
+  "model": "model_20180622-231242",
+  "intent": {
+    "confidence": 0.9999995114650161,
+    "name": "turn on"
+  },
+  "entities": [
+    {
+      "start": 15,
+      "end": 22,
+      "value": "turn on",
+      "confidence": 0.9999798259210771,
+      "extractor": "ner_crf",
+      "entity": "Action"
+    },
+    {
+      "start": 27,
+      "end": 32,
+      "value": "light",
+      "confidence": 0.9597315110679535,
+      "extractor": "ner_crf",
+      "entity": "Object"
+    },
+    {
+      "start": 40,
+      "end": 46,
+      "value": "garden",
+      "confidence": 0.9995846283672174,
+      "extractor": "ner_crf",
+      "entity": "Place"
+    }
+  ],
+  "text": "Would you mind turn on the light of the garden?",
+  "project": "default",
+  "intent_ranking": [
+    {
+      "confidence": 0.9999995114650161,
+      "name": "turn on"
+    },
+    {
+      "confidence": 4.885349839439467e-07,
+      "name": "turn off"
+    }
+  ]
 }
 ```
 
