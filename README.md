@@ -47,7 +47,7 @@ python3 nlg_training.py \
 Variants for the intent **"turn-off"** and the entities: objects:[light,lamp...], places:[kitchen,bedroom...]
 ```
 python3 nlg_training.py \
---oauth_token "tokenprovidedbybitext" \ 
+--oauth_token "tokenprovidedbybitext" \
 --sentence "turn off the lights in the kitchen" \
 --intent_name "turn off" \
 --action "turn off" \
