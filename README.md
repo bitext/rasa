@@ -1,6 +1,7 @@
 # Bitext NLG + Rasa NLU
 
 How to build a great chatbot integrating Bitext Variant Generation and Rasa NLU.
+Currently we cover three vertical: Smart Home, e-commerce and news.
 
 ## Getting Started
 
