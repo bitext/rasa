@@ -31,31 +31,31 @@ Suppose you want to make a bot for a smart home, which is the example we have ch
 Use **nlg_training.py** script to generate variants:
 Variants for the intent **"turn-on"** and the entities: objects:[light,lamp...], places:[kitchen,bedroom...]
 ```
-python3 nlg_training.py /
---oauth_token "tokenprovidedbybitext" / 
---sentence "turn on the lights in the kitchen" /
---intent_name "turn on" /
---action "turn on" /
---object "light,lamp, desk lamp,table lamp, hue" /
---place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" /
---negation 1 /
---politeness 1 /
---number 1 /
+python3 nlg_training.py \
+--oauth_token "tokenprovidedbybitext" \
+--sentence "turn on the lights in the kitchen" \
+--intent_name "turn on" \
+--action "turn on" \
+--object "light,lamp, desk lamp,table lamp, hue" \
+--place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
+--negation 1 \
+--politeness 1 \
+--number 1 \
 -o turn_on.json
 ```
 
 Variants for the intent **"turn-off"** and the entities: objects:[light,lamp...], places:[kitchen,bedroom...]
 ```
-python3 nlg_training.py /
---oauth_token "tokenprovidedbybitext" / 
---sentence "turn off the lights in the kitchen" /
---intent_name "turn off" /
---action "turn off" /
---object "light,lamp, desk lamp,table lamp, hue" /
---place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" /
---negation 1 /
---politeness 1 /
---number 1 /
+python3 nlg_training.py \
+--oauth_token "tokenprovidedbybitext" \ 
+--sentence "turn off the lights in the kitchen" \
+--intent_name "turn off" \
+--action "turn off" \
+--object "light,lamp, desk lamp,table lamp, hue" \
+--place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
+--negation 1 \
+--politeness 1 \
+--number 1 \
 -o turn_off.json
 ```
 
