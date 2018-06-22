@@ -36,7 +36,7 @@ python3 nlg_training.py \
 --sentence "turn on the lights in the kitchen" \
 --intent_name "turn on" \
 --action "turn on" \
---object "light,lamp, desk lamp,table lamp, hue" \
+--object "light,lamp" \
 --place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
 --negation 1 \
 --politeness 1 \
@@ -51,7 +51,7 @@ python3 nlg_training.py \
 --sentence "turn off the lights in the kitchen" \
 --intent_name "turn off" \
 --action "turn off" \
---object "light,lamp, desk lamp,table lamp, hue" \
+--object "light,lamp" \
 --place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
 --negation 1 \
 --politeness 1 \
