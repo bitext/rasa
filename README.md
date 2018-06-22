@@ -26,7 +26,7 @@ $ python -m spacy link en_core_web_md en
 
 ### Generating training data with Bitext Varian Generation
 
-Suppose you want to make a bot for a smart home, which is the example we have chosen for this demo. If we want our bot can turn on and turn off the lights of the house, we will need training data for these two intents and of course we will want to execute these intents to different objects and to different places.
+Suppose you want to make a bot for a smart home, which is the example we have chosen for this demo. If we want our bot can turn on and turn off the lights of the house, we will need training data for these two intents and of course we will want to execute these intents to different objects and in different places.
 
 Use **nlg_training.py** script to generate variants:
 Variants for the intent **"turn-on"** and the entities: objects:[light,lamp...], places:[kitchen,bedroom...]
