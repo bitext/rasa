@@ -1,0 +1,86 @@
+{
+    "training_data": "training_data.json",
+    "rasa_nlu_version": "0.12.3",
+    "trained_at": "20180622-231244",
+    "language": "en",
+    "pipeline": [
+        {
+            "case_sensitive": false,
+            "class": "rasa_nlu.utils.spacy_utils.SpacyNLP",
+            "model": "en",
+            "name": "nlp_spacy"
+        },
+        {
+            "class": "rasa_nlu.tokenizers.spacy_tokenizer.SpacyTokenizer",
+            "name": "tokenizer_spacy"
+        },
+        {
+            "class": "rasa_nlu.featurizers.spacy_featurizer.SpacyFeaturizer",
+            "name": "intent_featurizer_spacy"
+        },
+        {
+            "class": "rasa_nlu.featurizers.regex_featurizer.RegexFeaturizer",
+            "regex_file": "regex_featurizer.json",
+            "name": "intent_entity_featurizer_regex"
+        },
+        {
+            "max_iterations": 50,
+            "BILOU_flag": true,
+            "L2_c": 0.001,
+            "class": "rasa_nlu.extractors.crf_entity_extractor.CRFEntityExtractor",
+            "name": "ner_crf",
+            "classifier_file": "crf_model.pkl",
+            "L1_c": 1,
+            "features": [
+                [
+                    "low",
+                    "title",
+                    "upper",
+                    "pos",
+                    "pos2"
+                ],
+                [
+                    "bias",
+                    "low",
+                    "word3",
+                    "word2",
+                    "upper",
+                    "title",
+                    "digit",
+                    "pos",
+                    "pos2",
+                    "pattern"
+                ],
+                [
+                    "low",
+                    "title",
+                    "upper",
+                    "pos",
+                    "pos2"
+                ]
+            ]
+        },
+        {
+            "class": "rasa_nlu.extractors.entity_synonyms.EntitySynonymMapper",
+            "name": "ner_synonyms",
+            "synonyms_file": "entity_synonyms.json"
+        },
+        {
+            "max_cross_validation_folds": 5,
+            "classifier_file": "intent_classifier_sklearn.pkl",
+            "class": "rasa_nlu.classifiers.sklearn_intent_classifier.SklearnIntentClassifier",
+            "name": "intent_classifier_sklearn",
+            "kernels": [
+                "linear"
+            ],
+            "C": [
+                1,
+                2,
+                5,
+                10,
+                20,
+                100
+            ]
+        }
+    ]
+}
