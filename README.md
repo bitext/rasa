@@ -60,18 +60,18 @@ python3 nlg_training.py /
 
 **Command line params:**
 * Required params
-**oauth_token**: Token provided by bitext
-**sentence** or **infile**: a seed sentence or a text file with one seed sentence per line
-**intent_name**: intent name
+  * oauth_token: Token provided by bitext
+  * sentence or infile: a seed sentence or a text file with one seed sentence per line
+  * intent_name: intent name
 * Optional params (1-2-3)
-**action**: the action or list of actions (coma separated) to apply
-**object**: the object or list of objects (coma separated) to apply
-**place**: the place or list of places (coma separated) to apply
+  * action: the action or list of actions (coma separated) to apply
+  * object: the object or list of objects (coma separated) to apply
+  * place: the place or list of places (coma separated) to apply
 * Aditional params
-**negation**: add negative variants
-**politeness**: add polite variants
-**number**: add (plural and singular) variants
-**o**: output file name
+  * negation: add negative variants
+  * politeness: add polite variants
+  * number: add (plural and singular) variants
+  * o: output file name
 
 Use **join_intents.py** to generate the final training data file for Rasa. This file will be placed in **data/** directory.
 ```
@@ -133,7 +133,7 @@ python -m rasa_nlu.train \
     --path projects
 ```
 
-## Test your model
+### Test your model
 
 Use Rasa NLU as a HTTP server
 ```
@@ -192,4 +192,6 @@ Output should look like this
 }
 ```
 
+### Improving Rasa's results by 30% with artificial training data
+You can take a look at our test [here](https://blog.bitext.com/improving-rasas-results-with-artificial-training-data-ii)
 
