@@ -40,7 +40,7 @@ python3 nlg_training.py \
 --place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
 --negation 1 \
 --politeness 1 \
---number 1 \
+--number 0 \
 -o turn_on.json
 ```
 
@@ -55,7 +55,7 @@ python3 nlg_training.py \
 --place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
 --negation 1 \
 --politeness 1 \
---number 1 \
+--number 0 \
 -o turn_off.json
 ```
 
