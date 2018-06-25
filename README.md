@@ -5,7 +5,7 @@ Currently we cover three verticals: Smart Home, e-commerce and news.
 
 ## Getting Started
 
-The first thing you need to do to be able to integrate the Variants Generation service is to sign up for the [Bitext's API](https://api.bitext.com/#/login/), as you will need an oauth_token. The API has a free trial of 5000 requests.<br>Of course, you can also use the already trained model, which is yo can find in the **projects/** folder and give it a try!
+The first thing you need to do to be able to integrate the Variants Generation service is to sign up for the [Bitext's API](https://api.bitext.com/#/login/), as you will need an oauth_token. The API has a **free trial of 5000 requests.**<br>Of course, you can also use the already trained model, which is yo can find in the **projects/** folder and give it a try!
 
 
 ### Installing Rasa NLU
