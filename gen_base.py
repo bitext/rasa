@@ -1,7 +1,7 @@
 import requests
 import json
 
-def get_variants(token,sent,intent, politeness, negation, all_numbers):
+def get_variants(token, sent, intent, mode, politeness, negation, all_numbers):
 	if politeness:
 		politeness = True
 	else:
@@ -20,7 +20,7 @@ def get_variants(token,sent,intent, politeness, negation, all_numbers):
 	endpoint = "https://svc02.api.bitext.com/variants/"
 	headers = {"Authorization": "bearer " + token, "Content-Type": "application/json"}
 	header = {"Authorization": "bearer " + token}
-	params = {"language": "eng", "mode": "home", "text": sent, "intent": intent, \
+	params = {"language": "eng", "mode": mode, "text": sent, "intent": intent, \
 			"politeness": politeness, "negation": negation, "all_numbers": all_numbers, "output": "rasa"}
 	
 	# Sending the POST request
