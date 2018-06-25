@@ -46,6 +46,7 @@ if __name__ == "__main__":
 	CLI.add_argument("--oauth_token",nargs="?",type=str,default="tokenprovidedbybitext",required=True,help="Your oauth_token provided by Bitext")
 	CLI.add_argument("--sentence",nargs="?",type=str,default="",help="The sentence from which you want to generate the variants for the intent.")
 	CLI.add_argument("--intent_name",nargs="?",type=str,default="",required=True,help="The intent name")
+	CLI.add_argument("--mode",nargs="?",type=str,default="generic",required=True,help="mode: generic,home")
 	CLI.add_argument("--politeness",nargs="?",type=int,default=0,help="Add politeness to variants")
 	CLI.add_argument("--negation",nargs="?",type=int,default=0,help="Add negation to variants")
 	CLI.add_argument("--number",nargs="?",type=int,default=0,help="Add number to var")
@@ -71,7 +72,7 @@ if __name__ == "__main__":
 			base_json = base
 	# If a seed sentence is provided via CLI
 	if args.sentence:
-		base_json = get_variants(args.oauth_token, args.sentence, args.intent_name, args.politeness,args.negation,args.number)
+		base_json = get_variants(args.oauth_token, args.sentence, args.intent_name, args.mode, args.politeness,args.negation,args.number)
 	# Parse the lists of entities and add a None value to each
 	if args.action or args.object or args.place:
 
