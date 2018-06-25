@@ -35,6 +35,7 @@ python3 nlg_training.py \
 --oauth_token "tokenprovidedbybitext" \
 --sentence "turn on the lights in the kitchen" \
 --intent_name "turn on" \
+--mode "home" \
 --action "turn on" \
 --object "light,lamp" \
 --place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
@@ -50,6 +51,7 @@ python3 nlg_training.py \
 --oauth_token "tokenprovidedbybitext" \
 --sentence "turn off the lights in the kitchen" \
 --intent_name "turn off" \
+--mode "home" \
 --action "turn off" \
 --object "light,lamp" \
 --place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
@@ -64,6 +66,7 @@ python3 nlg_training.py \
   * oauth_token: Token provided by bitext
   * sentence or infile: a seed sentence or a text file with one seed sentence per line
   * intent_name: intent name
+  * mode: generic (news,e-commerce), home (smart home)
 * Optional params (1-2-3)
   * action: the action or list of actions (coma separated) to apply
   * object: the object or list of objects (coma separated) to apply
