@@ -1,11 +1,11 @@
 # Bitext Variant generation + Rasa NLU
 
-How to build a great chatbot integrating Bitext Variant Generation and Rasa NLU.<br>
-Currently we cover three verticals: Smart Home, e-commerce and news.
+How to build a smart chatbot integrating Bitext Variant Generation and Rasa NLU.<br>
+Currently we cover three business verticals: smart home, e-commerce and news.
 
 ## Getting Started
 
-The first thing you need to do to be able to integrate the Variants Generation service is to sign up for the [Bitext's API](https://api.bitext.com/#/login/), as you will need an oauth_token. The API has a **free trial of 5000 requests.**<br>Of course, you can also use the already trained model, which is yo can find in the **projects/** folder and give it a try!
+The first thing you need to do to be able to integrate the Variant Generation service is to sign up for the [Bitext API](https://api.bitext.com/#/login/), and obtain your API Token. The API offers a **free trial with 5000 requests.**<br>You can also try the the already-trained model available in the **projects** folder.
 
 
 ### Installing Rasa NLU
@@ -24,11 +24,11 @@ $ python -m spacy download en_core_web_md
 $ python -m spacy link en_core_web_md en
 ```
 
-### Generating training data with Bitext Varian Generation
+### Generating training data with Bitext Variant Generation
 
-Suppose you want to make a bot for a smart home, which is the example we have chosen for this demo. If we want to have our bot turn on and turn off the lights of the house, we will need training data for these two intents and of course we will want to execute these intents for different objects and in different places.
+Suppose you want to make a bot for a smart home, which is the example we have chosen for this demo. If we wanted to have our bot turn on and turn off the lights of the house, we would need training data for these two intents with variations for different objects and places.
 
-Use **nlg_training.py** script to generate variants:
+Use the **nlg_training.py** script to generate variants:
 Variants for the intent **"turn-on"** and the entities: objects:[light,lamp...], places:[kitchen,bedroom...]
 ```
 python3 nlg_training.py \
@@ -38,7 +38,7 @@ python3 nlg_training.py \
 --mode "home" \
 --action "turn on" \
 --object "light,lamp" \
---place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
+--place "kitchen,bathroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
 --negation 1 \
 --politeness 1 \
 --number 0 \
@@ -61,28 +61,28 @@ python3 nlg_training.py \
 -o turn_off.json
 ```
 
-**Command line params:**
-* Required params
-  * oauth_token: Token provided by bitext
-  * sentence or infile: a seed sentence or a text file with one seed sentence per line
+**Command line parameters:**
+* Required parameters
+  * oauth_token: Token provided by Bitext
+  * sentence or file: a seed sentence or a text file with one seed sentence per line
   * intent_name: intent name
   * mode: generic (news,e-commerce), home (smart home)
-* Optional params (1-2-3)
-  * action: the action or list of actions (coma separated) to apply
-  * object: the object or list of objects (coma separated) to apply
-  * place: the place or list of places (coma separated) to apply
-* Aditional params
+* Optional parameters (1-2-3)
+  * action: the action or list of actions (comma-separated) to apply
+  * object: the object or list of objects (comma-separated) to apply
+  * place: the place or list of places (comma-separated) to apply
+* Aditional parameters
   * negation: add negative variants
   * politeness: add polite variants
   * number: add (plural and singular) variants
   * o: output file name
 
-Use **join_intents.py** to generate the final training data file for Rasa. This file will be placed in **data/** directory.
+Use **join_intents.py** to generate the final training data file for Rasa. This file will be placed in the **data** directory.
 ```
 python3 join_intents.py turn_on.json turn_off.json
 ```
 
-The output should be a json file (named training_data.json) with **Rasa** format.<br>The generated training file contains 8,424 utterances, grammatically correct.
+You should obtain a JSON file (called training_data.json) with **Rasa** format.<br>The generated training file for this example contains 8,424 utterances.
 
 ```
 {
@@ -120,7 +120,7 @@ The output should be a json file (named training_data.json) with **Rasa** format
 
 ### Rasa config file
 
-Create a file called config_spacy.yml in **config/** directory.
+Create a file called config_spacy.yml in the **config** directory.
 
 ```
 language: "en"
@@ -145,7 +145,7 @@ python -m rasa_nlu.server --path projects
 ```
 Send a query
 ```
-curl -X POST localhost:5000/parse -d '{"q":"Would you mind turn on the lights in the kitchen?"}' | python -m json.tool
+curl -X POST localhost:5000/parse -d '{"q":"Would you mind turning on the lights in the kitchen?"}' | python -m json.tool
 ```
 Output should look like this
 ```
@@ -158,30 +158,30 @@ Output should look like this
   "entities": [
     {
       "start": 15,
-      "end": 22,
-      "value": "turn on",
+      "end": 25,
+      "value": "turning on",
       "confidence": 0.9999798259210771,
       "extractor": "ner_crf",
       "entity": "Action"
     },
     {
-      "start": 27,
-      "end": 32,
-      "value": "light",
+      "start": 30,
+      "end": 36,
+      "value": "lights",
       "confidence": 0.9597315110679535,
       "extractor": "ner_crf",
       "entity": "Object"
     },
     {
       "start": 40,
-      "end": 46,
-      "value": "garden",
+      "end": 51,
+      "value": "kitchen",
       "confidence": 0.9995846283672174,
       "extractor": "ner_crf",
       "entity": "Place"
     }
   ],
-  "text": "Would you mind turn on the light of the garden?",
+  "text": "Would you mind turning on the lights in the kitchen?",
   "project": "default",
   "intent_ranking": [
     {
@@ -197,5 +197,5 @@ Output should look like this
 ```
 
 ### Improving Rasa's results by 30% with artificial training data
-You can take a look at our test [here](https://blog.bitext.com/improving-rasas-results-with-artificial-training-data-ii)
+You can take a look at our tests [here](https://blog.bitext.com/improving-rasas-results-with-artificial-training-data-ii)
 
