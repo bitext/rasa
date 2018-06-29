@@ -1,11 +1,11 @@
 # Bitext Variant generation + Rasa NLU
 
-How to build a smart chatbot integrating Bitext Variant Generation and Rasa NLU.<br>
-We currently cover three business verticals: smart home, e-commerce and news.
+Here you have some indications to know how to build a smart chatbot integrating Bitext Variant Generation tool and Rasa NLU system.
+<br>We are currently covering three business sectors in this field: smart homes, e-commerce websites, and news. 
 
 ## Getting Started
 
-The first thing you need to do to be able to integrate the Variant Generation service is to sign up for the [Bitext API](https://api.bitext.com/#/login/), and obtain your API Token. The API offers a **free trial with 5000 requests.**<br>You can also try the the already-trained model available in the **projects** folder.
+First of all, you have to sign up for the Bitext API on our [website](https://api.bitext.com/#/login/). This process is completely free of charge and no credit card is needed! This API offers a **free trial** with 5000 requests. There is also a possibility to try the already-trained model available in the folder called "Projects".
 
 
 ### Installing Rasa NLU
