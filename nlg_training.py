@@ -1,3 +1,14 @@
+def gen_number(word):
+	p = inflect.engine()
+	if word:
+		if p.singular_noun(word) is False:
+			return p.plural(word)
+		else:
+			return word
+	else:
+		return word
+
+
 def gen_new_variants(data,action,object,place):
 	for variant in data:
 		newvar = copy.deepcopy(variant)
@@ -40,6 +51,8 @@ if __name__ == "__main__":
 	import copy
 	import itertools
 	import json
+	import inflect
+
 	
 	CLI=argparse.ArgumentParser()
 	
@@ -67,12 +80,12 @@ if __name__ == "__main__":
 			data = f.readlines()
 			base = {"rasa_nlu_data": {"common_examples": []}}
 			for x in data:
-				base_json = get_variants(args.oauth_token, x, args.intent_name, args.politeness,args.negation,args.number)
+				base_json = get_variants(args.oauth_token, x, args.intent_name, args.politeness,args.negation,0)
 				base['rasa_nlu_data']['common_examples'].extend(base_json['rasa_nlu_data']['common_examples'])
 			base_json = base
 	# If a seed sentence is provided via CLI
 	if args.sentence:
-		base_json = get_variants(args.oauth_token, args.sentence, args.intent_name, args.mode, args.politeness,args.negation,args.number)
+		base_json = get_variants(args.oauth_token, args.sentence, args.intent_name, args.politeness,args.negation,args.number)
 	# Parse the lists of entities and add a None value to each
 	if args.action or args.object or args.place:
 
@@ -86,11 +99,11 @@ if __name__ == "__main__":
 			action = [None]
 		
 		if len(args.object) <= 1:
-			object = args.object[0].split(",")
-			object.append(None)
+			objects = args.object[0].split(",")
+			objects.append(None)
 		elif len(args.object) > 1:
-			object = args.object
-			object.append(None)
+			objects = args.object
+			objects.append(None)
 		else:
 			object = []
 		
@@ -102,10 +115,28 @@ if __name__ == "__main__":
 			place.append(None)
 		else:
 			place = []
-		# Gen the variants of all posible combinations from the lists of entities
-		to_append_json = []
-		for lista in itertools.product(*[action, object, place]):
-			to_append_json.extend([x for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2])])
+
+		if args.number:
+			new_object = []
+			new_place = []
+			for o in objects:
+				new_object.append(gen_number(o))
+			for p in place:
+				new_place.append(gen_number(p))
+			
+			# Gen the variants of all posible combinations from the lists of entities with number
+			to_append_json = []
+			for lista in itertools.product(*[action, objects, place]):
+				to_append_json.extend([x for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2])])
+			for lista in itertools.product(*[action, new_object, new_place]):
+				to_append_json.extend([x for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2])])
+		else:
+			# Gen the variants of all posible combinations from the lists of entities
+			to_append_json = []
+			for lista in itertools.product(*[action, objects, place]):
+				to_append_json.extend([x for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2])])
+
+		
 		#Extend de base json with the new variants
 		final_json = {'rasa_nlu_data': {'common_examples': []}}
 		final_json['rasa_nlu_data']['common_examples'].extend(to_append_json)
