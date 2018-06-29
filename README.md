@@ -3,6 +3,9 @@
 Here you have some indications to know how to build a smart chatbot integrating Bitext Variant Generation tool and Rasa NLU system.
 <br>We are currently covering three business sectors in this field: smart homes, e-commerce websites, and news. 
 
+### Improving Rasa's results by 30% with artificial training data
+You can take a look at our tests [here](https://blog.bitext.com/improving-rasas-results-with-artificial-training-data-ii)
+
 ## Getting Started
 
 First of all, you have to sign up for the Bitext API on our [website](https://api.bitext.com/#/login/). This process is completely free of charge and no credit card is needed! This API offers a **free trial** with 5000 requests. There is also a possibility to try the already-trained model available in the folder called "Projects".
@@ -195,7 +198,4 @@ Output should look like this
   ]
 }
 ```
-
-### Improving Rasa's results by 30% with artificial training data
-You can take a look at our tests [here](https://blog.bitext.com/improving-rasas-results-with-artificial-training-data-ii)
 
