@@ -1,6 +1,6 @@
 # Bitext Variant generation + Rasa NLU
 
-Here you have some indications to know how to build a smart chatbot integrating Bitext Variant Generation tool and Rasa NLU system.
+Here you have some indications to know how to build a smart chatbot integrating [Bitext Variant Generation](https://blog.bitext.com/natural-language-generation-basics) tool and Rasa NLU system.
 <br>We are currently covering three business sectors in this field: smart homes, e-commerce websites, and news. 
 
 ### Improving Rasa's results by 30% with artificial training data
