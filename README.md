@@ -32,7 +32,7 @@ $ python -m spacy link en_core_web_md en
 Suppose you want to make a bot for a smart home, which is the example we have chosen for this demo. If we wanted to have our bot turn on and turn off the lights of the house, we would need training data for these two intents with variations for different objects and places.
 
 Use the **nlg_training.py** script to generate variants:
-Variants for the intent **"turn-on"** and the entities: objects:[light,lamp...], places:[kitchen,bedroom...]
+Variants for the intent **"turn-on"** and the entities: objects:[light,lamp...], places:[kitchen,bedroom,garage...]
 ```
 python3 nlg_training.py \
 --oauth_token "tokenprovidedbybitext" \
@@ -48,7 +48,7 @@ python3 nlg_training.py \
 -o turn_on.json
 ```
 
-Variants for the intent **"turn-off"** and the entities: objects:[light,lamp...], places:[kitchen,bedroom...]
+Variants for the intent **"turn-off"** and the entities: objects:[light,lamp...], places:[kitchen,bedrooms,garage,...]
 ```
 python3 nlg_training.py \
 --oauth_token "tokenprovidedbybitext" \
@@ -77,7 +77,7 @@ python3 nlg_training.py \
 * Aditional parameters
   * negation: add negative variants
   * politeness: add polite variants
-  * number: add (plural and singular) variants
+  * number: add plural variants
   * o: output file name
 
 Use **join_intents.py** to generate the final training data file for Rasa. This file will be placed in the **data** directory.
