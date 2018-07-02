@@ -1,19 +1,7 @@
 import requests
 import json
 
-def get_variants(token, sent, intent, mode, politeness, negation, all_numbers):
-	if politeness:
-		politeness = True
-	else:
-		politeness = False
-	if negation:
-		negation = True
-	else:
-		negation = False
-	if all_numbers:
-		all_numbers = True
-	else:
-		all_numbers = False
+def get_variants(token, sent, intent, mode='home', politeness=False, negation=False, all_numbers=False):
 		
 	output_json = []
 	# Building the POST request to rewriting analysis endpoint

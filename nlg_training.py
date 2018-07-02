@@ -14,33 +14,16 @@ def gen_new_variants(data,action,object,place):
 		newvar = copy.deepcopy(variant)
 		offset=0
 		for entity in newvar['entities']:
-			if action and entity['entity'].lower() == 'action':
-				diff = len(action) - len(entity['value'])
-				start = offset + entity['start']
-				end = offset + entity['end']
-				newvar['text'] = newvar['text'][:start] + action + newvar['text'][end:]
-				entity['value'] = action
-				entity['start'] = entity['start'] + offset
-				offset += diff
-				entity['end'] = entity['end'] + offset
-			if object and entity['entity'].lower() == 'object':
-				diff = len(object) - len(entity['value'])
-				start = offset + entity['start']
-				end = offset + entity['end']
-				newvar['text'] = newvar['text'][:start] + object + newvar['text'][end:]
-				entity['value'] = object
-				entity['start'] = entity['start'] + offset
-				offset += diff
-				entity['end'] = entity['end'] + offset
-			if place and entity['entity'].lower() == 'place':
-				diff = len(place) - len(entity['value'])
-				start = offset + entity['start']
-				end = offset + entity['end']
-				newvar['text'] = newvar['text'][:start] + place + newvar['text'][end:]
-				entity['value'] = place
-				entity['start'] = entity['start'] + offset
-				offset += diff
-				entity['end'] = entity['end'] + offset
+			for entkey,value in [('action',action), ('object',object),('place',place)]:
+				if value and entity['entity'].lower() == entkey:
+					diff = len(value) - len(entity['value'])
+					start = offset + entity['start']
+					end = offset + entity['end']
+					newvar['text'] = newvar['text'][:start] + value + newvar['text'][end:]
+					entity['value'] = value
+					entity['start'] = entity['start'] + offset
+					offset += diff
+					entity['end'] = entity['end'] + offset
 		yield newvar
 
 
@@ -68,8 +51,7 @@ if __name__ == "__main__":
 	CLI.add_argument("--place",nargs="+",default=[],help="A list of places")
 	CLI.add_argument("-o", "--output", help="Directs the output to a file")
 	CLI.add_argument("-f",'--infile', default="")
-	args = CLI.parse_args()
-	
+	args = CLI.parse_args()	
 	
 	if args.infile and args.sentence:
 		print('You can not provide the program with a seed phrase file and a seed phrase on the CLI at the same time')
@@ -80,12 +62,12 @@ if __name__ == "__main__":
 			data = f.readlines()
 			base = {"rasa_nlu_data": {"common_examples": []}}
 			for x in data:
-				base_json = get_variants(args.oauth_token, x, args.intent_name, args.politeness,args.negation,0)
+				base_json = get_variants(args.oauth_token, x, args.intent_name, args.mode, bool(args.politeness),bool(args.negation))
 				base['rasa_nlu_data']['common_examples'].extend(base_json['rasa_nlu_data']['common_examples'])
 			base_json = base
 	# If a seed sentence is provided via CLI
 	if args.sentence:
-		base_json = get_variants(args.oauth_token, args.sentence, args.intent_name, args.politeness,args.negation,args.number)
+		base_json = get_variants(args.oauth_token, args.sentence, args.intent_name, args.mode, bool(args.politeness),bool(args.negation),bool(args.number))
 	# Parse the lists of entities and add a None value to each
 	if args.action or args.object or args.place:
 
@@ -140,7 +122,11 @@ if __name__ == "__main__":
 		#Extend de base json with the new variants
 		final_json = {'rasa_nlu_data': {'common_examples': []}}
 		final_json['rasa_nlu_data']['common_examples'].extend(to_append_json)
-		# Write out the results to a file
-		with open(args.output, 'w') as output_file:
-			json.dump(final_json, output_file, indent=4)
+
+		if args.output:
+			# Write out the results to a file
+			with open(args.output, 'w') as output_file:
+				json.dump(final_json, output_file, indent=4)
+		else:
+			print(json.dumps(final_json,indent=4))
 
