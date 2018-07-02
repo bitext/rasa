@@ -57,7 +57,7 @@ python3 nlg_training.py \
 --mode "home" \
 --action "turn off" \
 --object "light,lamp" \
---place "kitchen,badroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
+--place "kitchen,bathroom,bedroom,garage,garden,yard,living room,dining room,balcony,terrace,basement,attic" \
 --negation 1 \
 --politeness 1 \
 --number 1 \
