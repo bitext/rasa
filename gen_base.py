@@ -2,7 +2,7 @@ import requests
 import json
 
 def get_variants(token, sent, intent, mode='home', politeness=False, negation=False, all_numbers=False):
-		
+	
 	output_json = []
 	# Building the POST request to rewriting analysis endpoint
 	endpoint = "https://svc02.api.bitext.com/variants/"
@@ -43,5 +43,8 @@ def get_variants(token, sent, intent, mode='home', politeness=False, negation=Fa
 		# The loop ends when we have response to the GET request
 		get_msg = res.reason
 		print("GET: '" + get_msg + "'\n\n")
+
+	with open('original_nlu.json','w+') as f:
+		json.dump(output_json,f,indent=4)
 
 	return {"rasa_nlu_data": {"common_examples": output_json}}

@@ -9,21 +9,30 @@ def gen_number(word):
 		return word
 
 
-def gen_new_variants(data,action,object,place):
+def gen_new_variants(data,action,obj,place):
 	for variant in data:
-		newvar = copy.deepcopy(variant)
+		subs = {
+			'action':[action] if action else [],
+			'object':[obj] if obj else [],
+			'place':[place] if place else []
+		}
 		offset=0
+		newvar = copy.deepcopy(variant)
 		for entity in newvar['entities']:
-			for entkey,value in [('action',action), ('object',object),('place',place)]:
-				if value and entity['entity'].lower() == entkey:
-					diff = len(value) - len(entity['value'])
-					start = offset + entity['start']
-					end = offset + entity['end']
-					newvar['text'] = newvar['text'][:start] + value + newvar['text'][end:]
-					entity['value'] = value
-					entity['start'] = entity['start'] + offset
-					offset += diff
-					entity['end'] = entity['end'] + offset
+			try:
+				value = subs[entity['entity'].lower()].pop()
+				diff = len(value) - len(entity['value'])
+				start = offset + entity['start']
+				end = offset + entity['end']
+				newvar['text'] = newvar['text'][:start] + value + newvar['text'][end:]
+				entity['value'] = value
+				entity['start'] = entity['start'] + offset
+				offset += diff
+				entity['end'] = entity['end'] + offset
+			except (IndexError, KeyError) as exc:
+				entity['start'] += offset
+				entity['end'] += offset
+				continue
 		yield newvar
 
 
@@ -102,21 +111,43 @@ if __name__ == "__main__":
 			new_object = []
 			new_place = []
 			for o in objects:
-				new_object.append(gen_number(o))
+				if o: new_object.append(gen_number(o))
+			objects.extend(new_object)
 			for p in place:
-				new_place.append(gen_number(p))
-			
+				if p: new_place.append(gen_number(p))
+			place.extend(new_place)
+	
 			# Gen the variants of all posible combinations from the lists of entities with number
 			to_append_json = []
+			rtexts=[]
 			for lista in itertools.product(*[action, objects, place]):
-				to_append_json.extend([x for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2])])
+				result = []
+				for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2]):
+					if x["text"] not in rtexts:
+						result.append(x)
+						rtexts.append(x["text"])
+				to_append_json.extend(result)
+			"""
 			for lista in itertools.product(*[action, new_object, new_place]):
-				to_append_json.extend([x for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2])])
+				result = []
+				for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2]):
+					if x["text"] not in rtexts:
+						result.append(x)
+						rtexts.append(x["text"])
+				to_append_json.extend(result)
+			"""
 		else:
 			# Gen the variants of all posible combinations from the lists of entities
 			to_append_json = []
+			rtexts=[]
+
 			for lista in itertools.product(*[action, objects, place]):
-				to_append_json.extend([x for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2])])
+				result = []
+				for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2]):
+					if x["text"] not in rtexts:
+						result.append(x)
+						rtexts.append(x["text"])
+				to_append_json.extend(result)
 
 		
 		#Extend de base json with the new variants
