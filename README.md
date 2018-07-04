@@ -85,7 +85,7 @@ Use **join_intents.py** to generate the final training data file for Rasa. This 
 python3 join_intents.py turn_on.json turn_off.json
 ```
 
-You should obtain a JSON file (called training_data.json) with **Rasa** format.<br>The generated training file for this example contains 8,424 utterances.
+You should obtain a JSON file (called training_data.json) with **Rasa** format.<br>The generated training file for this example contains 12.096 utterances.
 
 ```
 {
