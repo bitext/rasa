@@ -127,15 +127,6 @@ if __name__ == "__main__":
 						result.append(x)
 						rtexts.append(x["text"])
 				to_append_json.extend(result)
-			"""
-			for lista in itertools.product(*[action, new_object, new_place]):
-				result = []
-				for x in gen_new_variants(base_json['rasa_nlu_data']['common_examples'],lista[0],lista[1],lista[2]):
-					if x["text"] not in rtexts:
-						result.append(x)
-						rtexts.append(x["text"])
-				to_append_json.extend(result)
-			"""
 		else:
 			# Gen the variants of all posible combinations from the lists of entities
 			to_append_json = []
