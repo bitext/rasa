@@ -31,7 +31,8 @@ $ python -m spacy link en_core_web_md en
 
 Suppose you want to make a bot for a smart home, which is the example we have chosen for this demo. If we wanted to have our bot turn on and turn off the lights of the house, we would need training data for these two intents with variations for different objects and places.
 
-Use the **nlg_training.py** script to generate variants:
+Use the **nlg_training.py** script to generate additional training examples
+:
 Variants for the intent **"turn-on"** and the entities: objects:[light,lamp...], places:[kitchen,bedroom,garage...]
 ```
 python3 nlg_training.py \
